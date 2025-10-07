@@ -1,10 +1,11 @@
 package org.esprim.tpfoyer.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.io.Serializable;
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -12,7 +13,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Foyer {
+public class Foyer implements Serializable {
     @Id
     @GeneratedValue
     private Long idFoyer;
@@ -20,7 +21,10 @@ public class Foyer {
     private Long capaciteFoyer;
 
     @OneToOne(mappedBy = "foyer")
-    private Foyer foyer;
+    private Universitie universitie;
+
+    @OneToMany(mappedBy = "foyer" , cascade = CascadeType.ALL)
+    private List<Bloc> blocs;
 
 
 }

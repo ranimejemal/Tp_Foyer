@@ -1,16 +1,31 @@
 package org.esprim.tpfoyer.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
-public class Bloc {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+
+public class Bloc implements Serializable {
 
     @Id
     @GeneratedValue
     private Long idBloc;
     private String nomBloc;
     private Long capaciteBloc;
+
+    @OneToMany(mappedBy = "bloc",cascade = CascadeType.ALL ,
+    fetch= FetchType.EAGER)
+    private List<Chambre> chambres;
+
+    @ManyToOne
+    private Foyer foyer;
 }

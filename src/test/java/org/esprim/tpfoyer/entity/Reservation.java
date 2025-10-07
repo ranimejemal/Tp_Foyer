@@ -23,4 +23,6 @@ public class Reservation {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Etudiant> etudiants;
 
+
+
 }
