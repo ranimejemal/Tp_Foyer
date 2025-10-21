@@ -3,10 +3,7 @@ package org.esprim.tpfoyer.controllers;
 import lombok.AllArgsConstructor;
 import org.esprim.tpfoyer.entity.Chambre;
 import org.esprim.tpfoyer.service.iChambreService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,24 @@ public class ChambreRestController {
     @GetMapping("/retrieve-chambre/{chambre-id}")
     public Chambre retrieveChambre(@PathVariable("chambre-id") Long chId) {
         Chambre chambre = iChambreService.retrieveChambre(chId);
+        return chambre;
+    }
+
+    // http://localhost:8089/tpfoyer/chambre/add-chambre
+    @PostMapping("/add-chambre")
+    public Chambre addChambre(@RequestBody Chambre c) {
+        Chambre chambre = iChambreService.addChambre(c);
+        return chambre;
+    }
+    // http://localhost:8089/tpfoyer/chambre/remove-chambre/{chambre-id}
+    @DeleteMapping("/remove-chambre/{chambre-id}")
+    public void removeChambre(@PathVariable("chambre-id") Long chId) {
+        iChambreService.removeChambre(chId);
+    }
+    // http://localhost:8089/tpfoyer/chambre/modify-chambre
+    @PutMapping("/modify-chambre")
+    public Chambre modifyChambre(@RequestBody Chambre c) {
+        Chambre chambre = iChambreService.modifyChambre(c);
         return chambre;
     }
 
