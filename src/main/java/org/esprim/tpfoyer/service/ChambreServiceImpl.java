@@ -34,6 +34,6 @@ public class ChambreServiceImpl implements iChambreService {
 
     @Override
     public Chambre modifyChambre(Chambre chambre) {
-        return chambreRepository.save(chambre);
+        return chambreRepository.save(chambre) ;
     }
 }
