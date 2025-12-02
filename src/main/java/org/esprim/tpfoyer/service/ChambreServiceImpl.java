@@ -4,6 +4,7 @@ package org.esprim.tpfoyer.service;
 import lombok.AllArgsConstructor;
 import org.esprim.tpfoyer.entity.Chambre;
 import org.esprim.tpfoyer.repositories.ChambreRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,4 +37,11 @@ public class ChambreServiceImpl implements iChambreService {
     public Chambre modifyChambre(Chambre chambre) {
         return chambreRepository.save(chambre) ;
     }
+
+    @Override
+    public List<Chambre> getChambresParNomUniversitie(String nomUniversitie) {
+        return List.of();
+    }
+
+
 }

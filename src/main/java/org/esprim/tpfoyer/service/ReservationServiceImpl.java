@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ReservationServiceImpl implements iReservationService {
-
     ReservationRepository reservationRepository;
 
     @Override
@@ -19,11 +18,9 @@ public class ReservationServiceImpl implements iReservationService {
     }
 
     @Override
-    public Reservation retrieveReservation(Long reservationId) {
+    public Reservation retrieveReservation(String reservationId) {
         return reservationRepository.findById(reservationId).get();
     }
-
-
 
     @Override
     public Reservation addReservation(Reservation r) {
@@ -31,8 +28,8 @@ public class ReservationServiceImpl implements iReservationService {
     }
 
     @Override
-    public void removeReservation(Long reservationId) {
-        reservationRepository.deleteById(String.valueOf(reservationId);
+    public void removeReservation(String reservationId) {
+        reservationRepository.deleteById(String.valueOf(reservationId));
     }
 
     @Override

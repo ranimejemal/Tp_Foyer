@@ -10,4 +10,5 @@ public interface iChambreService {
     public Chambre addChambre(Chambre c);
     public void removeChambre(Long chambreId);
     public Chambre modifyChambre(Chambre chambre);
+    List<Chambre> getChambresParNomUniversitie(String nomUniversitie);
 }
