@@ -1,15 +1,17 @@
 package org.esprim.tpfoyer.service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.esprim.tpfoyer.entity.Bloc;
 import org.esprim.tpfoyer.entity.Chambre;
 import org.esprim.tpfoyer.repositories.BlocRepository;
 import org.esprim.tpfoyer.repositories.ChambreRepository;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 @Service
 @AllArgsConstructor
 
@@ -83,6 +85,40 @@ public class blocServiceImpl implements iBlocService {
         blocRepository.save(bloc);
 
         return bloc;
+    }
+
+    @Scheduled(cron = "0 * * * * *")
+    public void listeChambreParBloc() {
+
+        List<Bloc> blocs = blocRepository.findAll();
+
+        if (!blocs.isEmpty()) {
+
+            for (Bloc bloc : blocs) {
+
+                // Bloc header
+                log.info("Bloc => " + bloc.getNomBloc() + " ayant une capacité " + bloc.getCapaciteBloc());
+                log.info("La liste des chambres pour ce bloc :");
+
+                // No rooms in this bloc
+                if (bloc.getChambres() == null || bloc.getChambres().isEmpty()) {
+                    log.info("Pas de chambre disponible dans ce bloc");
+                    log.info("**********************");
+                    continue;
+                }
+
+                // List rooms
+                for (Chambre chambre : bloc.getChambres()) {
+                    log.info("NumChambre: " + chambre.getNumeroChambre()
+                            + " | type: " + chambre.getTypeC());
+                }
+
+                log.info("**********************");
+            }
+
+        } else {
+            log.info("Aucun bloc enregistré");
+        }
     }
 
 }
